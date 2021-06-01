@@ -3,7 +3,7 @@ export async function addMarks(text: string, words: string) {
 
   const replaceAll = (str: string, find: string, replace: string) => str.replace(new RegExp(find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'g'), replace);
 
-  const searchWords = words.split(" ").filter(i => i.trim().length > 0);
+  const searchWords = words.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(" ").filter(i => i.trim().length > 0);
   const markedText = text.replace(new RegExp(searchWords.join("|"), "gi"), matched => `<mark>${matched}</mark>`);
 
   // https://stackoverflow.com/a/7671978/9238321
